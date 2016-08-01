@@ -3,51 +3,36 @@
  * https://github.com/facebook/react-native
  * @flow
  */
-
+import Main from './App/Components/Main';
 import React, { Component } from 'react';
 import {
   AppRegistry,
   StyleSheet,
   Text,
+  Navigator,
   View
 } from 'react-native';
+
+var styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#111111'
+  },
+});
 
 class githubNotetaker extends Component {
   render() {
     return (
-      <View style={styles.container}>
-        <Text style={styles.welcome}>
-          Welcome to React Native!
-        </Text>
-        <Text style={styles.instructions}>
-          To get started, edit index.android.js
-        </Text>
-        <Text style={styles.instructions}>
-          Double tap R on your keyboard to reload,{'\n'}
-          Shake or press menu button for dev menu
-        </Text>
-      </View>
+      <Navigator
+        style={styles.container}
+        initialRoute={{
+          title: 'Github Scene',
+          index: 1 }}
+          renderScene={(route, navigator) =>
+          <Main />
+        } />
     );
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF',
-  },
-  welcome: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
-  },
-  instructions: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5,
-  },
-});
 
 AppRegistry.registerComponent('githubNotetaker', () => githubNotetaker);
