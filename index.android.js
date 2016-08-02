@@ -15,22 +15,22 @@ import {
 
 var styles = StyleSheet.create({
   container: {
-    flex: 1,
-    backgroundColor: '#111111'
+    flex: 1
   },
 });
 
 class githubNotetaker extends Component {
+  renderScene(route, navigator) {
+    let Component = (route.component) ? route.component : Main;
+    return <Component navigator={navigator} {...route.passProps}/>;
+  }
+
   render() {
     return (
       <Navigator
         style={styles.container}
-        initialRoute={{
-          title: 'Github Scene',
-          index: 1 }}
-          renderScene={(route, navigator) =>
-          <Main />
-        } />
+        initialRoute={{}}
+        renderScene={this.renderScene.bind(this)} />
     );
   }
 }
