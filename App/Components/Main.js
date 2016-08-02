@@ -1,3 +1,4 @@
+import api from '../Utils/api';
 import React, { Component } from 'react';
 import {
   View,
@@ -67,7 +68,26 @@ class Main extends React.Component{
     this.setState({
       isLoading: true
     });
-    console.log('SUBMIT', this.state.username);
+    api.getBio(this.state.username)
+      .then((res) => {
+          if(res.message === 'Not Found'){
+              this.setState({
+                  error: 'User not found',
+                  isLoading: false
+              })
+          } else {
+              this.props.navigator.push({
+                  title: res.name || "Select an Option",
+                  component: Dashboard,
+                  passProps: {userInfor: res}
+              });
+              this.setState({
+                  isLoading: false,
+                  error: false,
+                  username: ''
+              })
+          }
+      });
   }
   render(){
     return (
