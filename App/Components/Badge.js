@@ -1,4 +1,5 @@
-import React from 'react-native';
+import React, { Component } from 'react';
+import Profile from './Profile';
 
 import {
   Text,

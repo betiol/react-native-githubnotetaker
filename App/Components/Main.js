@@ -1,5 +1,4 @@
 import api from '../Utils/api';
-import Profile from './Profile';
 import Dashboard from './Dashboard';
 import React, { Component } from 'react';
 import {
