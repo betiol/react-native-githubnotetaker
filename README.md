@@ -3,14 +3,14 @@
 run npm install
 ```
 
-##React-Native Plataform Android
+##React-Native Platform Android
 ```bash
 run Genymotion Emulator Android
 react-native run-android
 react-native start
 ```
 
-##React-Native Plataform iOS
+##React-Native Platform iOS
 ```bash
 react-native run-ios
 react-native start
