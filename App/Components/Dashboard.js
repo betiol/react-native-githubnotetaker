@@ -1,5 +1,7 @@
 import Profile from './Profile';
 import React, { Component } from 'react';
+import Repositories from './Repositories';
+import api from '../Utils/api';
 
 import {
   Text,
@@ -42,43 +44,53 @@ class Dashboard extends React.Component{
         return obj;
     }
     goToProfile(){
-        this.props.navigator.push({
-            component: Profile,
-            title: 'Profile Page',
-            passProps: {userInfo: this.props.userInfo}
-        })
+      this.props.navigator.push({
+        component: Profile,
+        title: 'Profile Page',
+        passProps: {userInfo: this.props.userInfo}
+      })
     }
     goToRepos(){
-        console.log('Going to Repos');
-    }
-    goToNotes(){
-        console.log('Going to Notes');
-    }
-    render(){
-        return (
-            <View style={styles.container}>
-                <Image source={{uri: this.props.userInfo.avatar_url}} style={styles.image}/>
-                <TouchableHighlight
-                    style={this.makeBackground(0)}
-                    onPress={this.goToProfile.bind(this)}
-                    underlayColor="#88D4F5">
-                    <Text style={styles.buttonText}>View Profile</Text>
-                </TouchableHighlight>
-                <TouchableHighlight
-                    style={this.makeBackground(1)}
-                    onPress={this.goToRepos.bind(this)}
-                    underlayColor="#E39EBF">
-                    <Text style={styles.buttonText}>View Repositories</Text>
-                </TouchableHighlight>
-                <TouchableHighlight
-                    style={this.makeBackground(2)}
-                    onPress={this.goToNotes.bind(this)}
-                    underlayColor="#9BAAF3">
-                    <Text style={styles.buttonText}>Take Notes</Text>
-                </TouchableHighlight>
-            </View>
-        )
-    }
-};
+       api.getRepos(this.props.userInfo.login)
+           .then((res) => {
+               this.props.navigator.push({
+                   component: Repositories,
+                   title: 'Repos Page',
+                   passProps: {
+                       userInfo: this.props.userInfo,
+                       repos: res
+                   }
+               });
+           });
+   }
+   goToNotes(){
+   console.log('Going to Notes');
+   }
+ render(){
+   return (
+       <View style={styles.container}>
+         <Image source={{uri: this.props.userInfo.avatar_url}} style={styles.image}/>
+         <TouchableHighlight
+             style={this.makeBackground(0)}
+             onPress={this.goToProfile.bind(this)}
+             underlayColor="#88D4F5">
+               <Text style={styles.buttonText}>View Profile</Text>
+         </TouchableHighlight>
+         <TouchableHighlight
+             style={this.makeBackground(1)}
+             onPress={this.goToRepos.bind(this)}
+             underlayColor="#E39EBF">
+               <Text style={styles.buttonText}>View Repositories</Text>
+         </TouchableHighlight>
+         <TouchableHighlight
+             style={this.makeBackground(2)}
+             onPress={this.goToNotes.bind(this)}
+             underlayColor="#9BAAF3">
+               <Text style={styles.buttonText}>Take Notes</Text>
+         </TouchableHighlight>
+       </View>
+     )
+ }
+ };
 
-module.exports = Dashboard;
+ module.exports = Dashboard;

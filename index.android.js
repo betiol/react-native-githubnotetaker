@@ -16,7 +16,7 @@ import {
 var styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff"
+    backgroundColor: '#111111'
   },
 });
 
@@ -30,7 +30,8 @@ class githubNotetaker extends Component {
     return (
       <Navigator
         style={styles.container}
-        initialRoute={{title: "Github Notetaker"}}
+        initialRoute={{
+          title: 'Github NoteTaker'}}
         renderScene={this.renderScene.bind(this)} />
     );
   }
